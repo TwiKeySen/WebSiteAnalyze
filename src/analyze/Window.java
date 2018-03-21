@@ -3,6 +3,7 @@ package analyze;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,16 +16,16 @@ import javax.swing.JTextField;
  * @author tomas
  *
  */
-public class Window 
-{
+public class Window {
 	/**
 	 * Constructor with 3 params, the width, height and title of the frame
 	 * @param width
 	 * @param height
 	 * @param title
 	 */
-	public Window(int width, int height, String title)
+	public Window(int width, int height, String title)	
 	{
+		
 		// Creating a new frame
 		JFrame frame				= new JFrame(title);
 		JLabel urlLabel				= new JLabel();
@@ -63,15 +64,25 @@ public class Window
 		
 		frame.setVisible(true);
 		
-		submitButton.addActionListener(new ActionListener() {
+		submitButton.addActionListener(new ActionListener() 
+		{
 			
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				String getUrlFromTextField = urlTextField.getText();
+			public void actionPerformed(ActionEvent e) 
+			{
+				String url = urlTextField.getText();
 				
 				AnalyzeChoose ac = new AnalyzeChoose();
 				
-//				ac.(getUrlFromTextField);
+				try 
+				{
+					ac.showUrlContent(url);
+				} 
+				catch (IOException e1) 
+				{
+					e1.printStackTrace();
+				}
+				
 			}
 		});
 	}
